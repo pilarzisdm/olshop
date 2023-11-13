@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def get_shops_in_location(location):
-    url = f'https://shopee.co.id/search?keyword={riau}'
+    url = f'https://shopee.co.id/search?keyword={location}'
     response = requests.get(url)
 
     if response.status_code == 200:
