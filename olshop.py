@@ -1,4 +1,4 @@
-# shopee.py
+# shopee.pysepatu
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
@@ -29,7 +29,7 @@ def search(katakunci):
         driver.execute_script('window.scrollTo(0, 2500);')
         time.sleep(5)
         soup_a = BeautifulSoup(driver.page_source, 'html.parser')
-        products = soup_a.find('div', class_='row shopee-search-item-result__items')
+        products = soup_a.find('div', class_='shopee-search-item-result')
         for link in products.find_all('a'):
             links.append(link.get('href'))
             print(link.get('href'))
