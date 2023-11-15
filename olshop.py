@@ -50,7 +50,7 @@ def get_product(produt_url):
         title = soup_b.find('span', class_='_44qnta').text
         price = soup_b.find('div', class_='pqTWkA').text
         try:
-            image = soup_b.find('div', class_='_2JMB9h _3XaILN')['style']
+            image = soup_b.find('div', class_='UJO7PA')['style']
             imgurl = re.findall('url\((.*?)\)', image)
         except:
             imgurl = 'none'
