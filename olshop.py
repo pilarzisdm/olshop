@@ -45,10 +45,10 @@ def get_product(produt_url):
         driver.execute_script('window.scrollTo(0, 1500);')
         time.sleep(3)
         WebDriverWait(driver, timeout).until(
-            EC.visibility_of_element_located((By.CLASS_NAME, 'OSgLcw')))
+            EC.visibility_of_element_located((By.CLASS_NAME, '_44qnta')))
         soup_b = BeautifulSoup(driver.page_source, 'html.parser')
-        title = soup_b.find('span', class_='OSgLcw').text
-        price = soup_b.find('div', class_='_3n5NQx').text
+        title = soup_b.find('span', class_='_44qnta').text
+        price = soup_b.find('div', class_='pqTWkA').text
         try:
             image = soup_b.find('div', class_='_2JMB9h _3XaILN')['style']
             imgurl = re.findall('url\((.*?)\)', image)
