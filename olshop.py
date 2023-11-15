@@ -12,7 +12,7 @@ import time
 
 chrome_options = Options()
 chrome_options.add_argument('--headless')
-chrome_options.add_argument('log-level=2')
+chrome_options.add_argument('--log-level=2')
 driver = webdriver.Chrome(options=chrome_options)
 
 katakunci = input('Masukkan kata kunci : ')
@@ -45,7 +45,7 @@ def get_product(produt_url):
         time.sleep(3)
         driver.execute_script('window.scrollTo(0, 1500);')
         time.sleep(3)
-        WebDriverWait(driver, timeout).until(
+        WebDriverWait(driver, timeout=10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, '_44qnta')))
         soup_b = BeautifulSoup(driver.page_source, 'html.parser')
         title = soup_b.find('span', class_='_44qnta').text
@@ -69,4 +69,8 @@ products_urls = search(katakunci)
 for product_url in products_urls:
     get_product(product_url)
 
-driver.quit()
+try:
+    driver.quit()
+except Exception as e:
+    print(f"Error while quitting WebDriver: {str(e)}")
+
