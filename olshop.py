@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 
 # Function to search for products
-def search(katakunci):
+def search(driver, katakunci):
     links = []
     st.write(f'Mencari semua produk dengan kata kunci: {katakunci}')
     url = 'https://shopee.co.id/search?keyword=' + katakunci
@@ -35,7 +35,7 @@ def search(katakunci):
     return links
 
 # Function to get product details
-def get_product(product_url):
+def get_product(driver, product_url):
     try:
         url = 'https://shopee.co.id' + product_url
         driver.get(url)
@@ -64,23 +64,23 @@ def get_product(product_url):
 # Streamlit app
 st.title("Shopee Scraper")
 
-katakunci = st.text_input('Masukkan kata kunci:')
-
-# Create a button to start the scraping process
-if st.button("Cari Produk"):
-    st.write("Sedang mencari produk...")
-    products_urls = search(katakunci)
-
-    for product_url in products_urls:
-        get_product(product_url)
-
-    st.write("Proses selesai.")
-
 # WebDriver initialization
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--log-level=2')
 driver = webdriver.Chrome(options=chrome_options)
+
+katakunci = st.text_input('Masukkan kata kunci:')
+
+# Create a button to start the scraping process
+if st.button("Cari Produk"):
+    st.write("Sedang mencari produk...")
+    products_urls = search(driver, katakunci)
+
+    for product_url in products_urls:
+        get_product(driver, product_url)
+
+    st.write("Proses selesai.")
 
 # Exception handling for quitting WebDriver
 try:
