@@ -29,7 +29,7 @@ def search(driver, katakunci):
         time.sleep(5)  # Adjust the sleep duration if necessary
         
         soup_a = BeautifulSoup(driver.page_source, 'html.parser')
-        products = soup_a.find('div', class_='row shopee-search-item-result__items')
+        products = soup_a.find('div', class_='shopee-search-item-result')
         
         if products:
             for link in products.find_all('a'):
