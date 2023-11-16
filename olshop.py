@@ -87,3 +87,10 @@ try:
     driver.quit()
 except Exception as e:
     st.write(f"Error while quitting WebDriver: {str(e)}")
+
+if products:
+    for link in products.find_all('a'):
+        links.append(link.get('href'))
+        st.write(link.get('href'))
+else:
+    st.write("No products found.")
