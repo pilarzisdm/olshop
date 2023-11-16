@@ -20,19 +20,24 @@ def search(driver, katakunci):
 
     try:
         driver.get(url)
-        time.sleep(5)
+        WebDriverWait(driver, timeout=10).until(EC.visibility_of_element_located((By.CLASS_NAME, 'row')))
         driver.execute_script('window.scrollTo(0, 1500);')
-        time.sleep(5)
-        driver.execute_script('window.scrollTo(0, 2500);')
-        time.sleep(5)
+        WebDriverWait(driver, timeout=10).until(EC.visibility_of_element_located((By.CLASS_NAME, 'shopee-search-item-result__items')))
         soup_a = BeautifulSoup(driver.page_source, 'html.parser')
         products = soup_a.find('div', class_='row shopee-search-item-result__items')
-        for link in products.find_all('a'):
-            links.append(link.get('href'))
-            st.write(link.get('href'))
+        
+        if products:
+            for link in products.find_all('a'):
+                links.append(link.get('href'))
+                st.write(link.get('href'))
+        else:
+            st.write("No products found.")
+            
     except TimeoutException:
         st.write(f'Failed to get links with query {katakunci}')
+
     return links
+
 
 # Function to get product details
 def get_product(driver, product_url):
@@ -88,9 +93,3 @@ try:
 except Exception as e:
     st.write(f"Error while quitting WebDriver: {str(e)}")
 
-if products:
-    for link in products.find_all('a'):
-        links.append(link.get('href'))
-        st.write(link.get('href'))
-else:
-    st.write("No products found.")
