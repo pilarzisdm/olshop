@@ -39,6 +39,7 @@ def search(driver, katakunci):
     return links
 
 
+
 # Function to get product details
 def get_product(driver, product_url):
     try:
