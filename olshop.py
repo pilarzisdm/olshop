@@ -74,10 +74,12 @@ def get_product(driver, product_url):
 st.title("Shopee Scraper")
 
 # WebDriver initialization
+from webdriver_manager.chrome import ChromeDriverManager
+# WebDriver initialization using webdriver_manager
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--log-level=2')
-driver = webdriver.Chrome(options=chrome_options)
+driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
 katakunci = st.text_input('Masukkan kata kunci:')
 
