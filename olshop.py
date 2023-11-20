@@ -56,16 +56,7 @@ def get_product(driver, product_url):
         soup_b = BeautifulSoup(driver.page_source, 'html.parser')
         title = soup_b.find('span', class_='_44qnta').text
         price = soup_b.find('div', class_='pqTWkA').text
-        try:
-            image_element = soup_b.find('div', class_='UJO7PA')
-            if image_element:
-               image_style = image_element.get('style', '')
-               imgurl = re.findall('url\((.*?)\)', image_style)
-            else:
-                imgurl = 'none'
-        except Exception as e:
-            st.write(f'Error extracting image URL: {str(e)}')
-            imgurl = 'none'
+        
         desc = soup_b.find('div', class_='_2u0jt9').text
         st.write(f'Scraping {title}')
         with open('result.csv', 'a', encoding='utf-8', newline='') as f:
